@@ -1,19 +1,25 @@
 "use client"
 
+import moviesInterestImage from "@/imports/download__7_.jpg"
+import buildingStartupInterestImage from "@/imports/Steve_Jobs.jpg"
+import poetryInterestImage from "@/imports/The_Moment_of_Writing_by_Amit_Chaudhuri.jpg"
 import { useRouter } from "next/navigation"
+import { MobileMenu } from "./MobileMenu"
+import { SiteFooter } from "./SiteFooter"
+import { projectInquiryURL } from "./homeData"
 
 const assets = "/assets"
 
 const interests = [
   ["AI tools", "8f67d.png"],
-  ["Matcha deserts", "454dc.png"],
+  ["Movies", moviesInterestImage.src],
   ["Minimal interfaces", "b5d23.png"],
-  ["Sketching in coffee shops", "e2ef1.png"],
+  ["Poetry", poetryInterestImage.src],
   ["Street photography", "32ddd.png"],
-  ["Tokyo cafés", "eb64c.png"],
+  ["Cafés", "eb64c.png"],
   ["Design systems", "e08d5.png"],
   ["Ambient music", "989eb.png"],
-  ["Matcha", "8a8d3.png"],
+  ["Building Startup", buildingStartupInterestImage.src],
   ["Interior design", "6f608.png"],
   ["Long walks", "ff8e8.png"],
 ]
@@ -54,7 +60,13 @@ export default function AboutPage() {
             Resume
           </button>
         </nav>
-        <button className="button about-header-cta" type="button">
+        <a
+          className="button about-header-cta"
+          href={projectInquiryURL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Start a project"
+        >
           <span>Start a project</span>
           <img
             src={`${assets}/0e5e0.svg`}
@@ -62,17 +74,85 @@ export default function AboutPage() {
             width="18"
             height="18"
           />
-        </button>
+        </a>
+        <MobileMenu active="about" />
       </header>
 
       <section className="about-hero-section">
         <div className="about-hero-photo">
-          <img src={`${assets}/0381f.png`} alt="Himanshu Ranjan Raj" />
+          <style>{`
+            @keyframes about-photo-cycle {
+              0%, 16% { opacity: 1; }
+              20%, 100% { opacity: 0; }
+            }
+
+            @keyframes about-dot-cycle {
+              0%, 16% { width: 21px; height: 13px; background: #fafafa; }
+              20%, 100% { width: 10px; height: 10px; background: rgba(233, 233, 240, 0.5); }
+            }
+
+            .about-hero-photo > .about-carousel-image {
+              position: absolute;
+              inset: 0;
+              opacity: 0;
+              animation: about-photo-cycle 25s infinite;
+            }
+
+            .photo-pagination .about-carousel-dot {
+              animation: about-dot-cycle 25s infinite;
+            }
+
+            .about-carousel-image:nth-of-type(2),
+            .about-carousel-dot:nth-child(2) { animation-delay: 5s; }
+            .about-carousel-image:nth-of-type(3),
+            .about-carousel-dot:nth-child(3) { animation-delay: 10s; }
+            .about-carousel-image:nth-of-type(4),
+            .about-carousel-dot:nth-child(4) { animation-delay: 15s; }
+            .about-carousel-image:nth-of-type(5),
+            .about-carousel-dot:nth-child(5) { animation-delay: 20s; }
+
+            @media (prefers-reduced-motion: reduce) {
+              .about-hero-photo > .about-carousel-image,
+              .photo-pagination .about-carousel-dot { animation: none; }
+              .about-hero-photo > .about-carousel-image:first-of-type { opacity: 1; }
+              .photo-pagination .about-carousel-dot:first-child {
+                width: 21px;
+                height: 13px;
+                background: #fafafa;
+              }
+            }
+          `}</style>
+          <img
+            className="about-carousel-image"
+            src={`${assets}/0381f.png`}
+            alt="Himanshu Ranjan Raj"
+          />
+          <img
+            className="about-carousel-image"
+            src={`${assets}/about-carousel-2.jpg`}
+            alt="Himanshu taking a mirror selfie"
+          />
+          <img
+            className="about-carousel-image"
+            src={`${assets}/about-carousel-3.jpg`}
+            alt="Himanshu standing outdoors"
+          />
+          <img
+            className="about-carousel-image"
+            src={`${assets}/about-carousel-4.jpg`}
+            alt="Himanshu sitting on architectural steps"
+          />
+          <img
+            className="about-carousel-image"
+            src={`${assets}/about-carousel-5.jpg`}
+            alt="Himanshu at the beach"
+          />
           <div className="photo-pagination" aria-hidden="true">
-            <span />
-            <span />
-            <span className="selected" />
-            <span />
+            <span className="about-carousel-dot" />
+            <span className="about-carousel-dot" />
+            <span className="about-carousel-dot" />
+            <span className="about-carousel-dot" />
+            <span className="about-carousel-dot" />
           </div>
         </div>
         <div className="about-hero-copy">
@@ -85,24 +165,25 @@ export default function AboutPage() {
             </h1>
             <div className="about-bio">
               <p>
-                Hey, I’m Himanshu — a Product Designer who makes pixels behave
-                and products make sense.
+                I'm a Product Designer who enjoys making sense of complex
+                problems and turning them into simple, thoughtful experiences. I
+                like exploring ideas, understanding people, and finding the
+                little details that make a product feel just right.
               </p>
               <p>
-                I turn complicated problems into simple, thoughtful experiences
-                for the people who actually have to use them. From websites that
-                look good to products that actually work, I enjoy connecting the
-                dots between design, business, and human behaviour.
+                Outside of design, I'm someone with a lot of interests and
+                probably too many open tabs in my head. I enjoy reading, writing
+                poetry, playing chess, and getting lost in conversations about
+                things I know very little about. I'm naturally curious, sometimes
+                a little philosophical, and always interested in learning
+                something new.
               </p>
               <p>
-                When I’m not moving pixels around in Figma, I’m probably
-                overthinking a design decision, writing something poetic, or
-                convincing myself that one more portfolio redesign is definitely
-                the last one.
-              </p>
-              <p>
-                Good design, questionable sleep schedule, endless curiosity.
-                That’s pretty much me.
+                I have a thing for words, whether it's a good book, a line of
+                poetry, or something I've written myself. I enjoy observing
+                little things, overthinking unnecessary things, and finding
+                meaning in ordinary moments. I guess I'm still figuring out
+                quite a few things about life, and I'm perfectly okay with that.
               </p>
             </div>
           </div>
@@ -205,7 +286,7 @@ export default function AboutPage() {
         <div className="interest-list">
           {interests.map(([label, image]) => (
             <div className="interest-chip" key={label}>
-              <img src={`${assets}/${image}`} alt="" />
+              <img src={image.startsWith("/") ? image : `${assets}/${image}`} alt="" />
               <span>{label}</span>
             </div>
           ))}
@@ -218,9 +299,14 @@ export default function AboutPage() {
             My All Time Fav Movies
             <span>(Yes I am a movie nerd and these may change someday)</span>
           </h2>
-          <button className="button" type="button">
+          <a
+            className="button"
+            href="https://letterboxd.com/himanshuansh/"
+            target="_blank"
+            rel="noreferrer"
+          >
             Wanna see my Letterboxd ?
-          </button>
+          </a>
         </div>
         <div className="movie-grid">
           {movies.map((movie, index) => (
@@ -254,44 +340,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <footer className="footer about-page-footer">
-        <button
-          className="logo footer-logo logo-button"
-          type="button"
-          onClick={() => router.push("/")}
-        >
-          himanshu.
-        </button>
-        <div className="footer-links">
-          <div>
-            <strong>Navigate</strong>
-            <button type="button" onClick={() => router.push("/")}>
-              Home
-            </button>
-            <button type="button" onClick={() => router.push("/")}>
-              Projects
-            </button>
-            <button type="button">About</button>
-            <button type="button">Contact</button>
-          </div>
-          <div>
-            <strong>Connect</strong>
-            <a href="https://x.com/" target="_blank" rel="noreferrer">
-              X (Twitter)
-            </a>
-            <a href="https://linkedin.com/" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href="https://instagram.com/" target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-          </div>
-          <div>
-            <strong>Based in</strong>
-            <span>AMS &nbsp; 3:52 PM</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter className="about-page-footer" />
     </main>
   )
 }

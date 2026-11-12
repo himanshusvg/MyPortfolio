@@ -1,10 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { MobileMenu } from "./MobileMenu"
+import { SiteFooter } from "./SiteFooter"
+import { projectInquiryURL } from "./homeData"
 
 const assets = "/assets"
 
-const description =
+const defaultDescription =
   "Worked with clients and startups to design web and mobile experiences focused on usability, structure, and clarity. My work included user flows, wireframes, UI design, interactive prototypes, and design systems across different digital products. I collaborated with clients to turn ideas into usable interfaces while balancing user needs and business goals."
 
 const experience = [
@@ -13,6 +16,8 @@ const experience = [
     organization: "Remote",
     dates: "April 2023 - Present",
     image: "0f835.png",
+    description:
+      "Worked with startups and clients to design intuitive digital products across SaaS platforms, websites, and mobile applications. Led projects from wireframing and user flows to high-fidelity UI, interactive prototyping, and responsive implementation. Focused on translating business requirements into clear, user-centered experiences that balance usability with visual quality.",
     featured: true,
   },
   {
@@ -20,18 +25,24 @@ const experience = [
     organization: "Friends of Figma, Design for Social Impact",
     dates: "October 2026 - Present",
     image: "7c811.png",
+    description:
+      "Contribute to the design community by fostering collaboration, knowledge sharing, and engagement among designers. Support initiatives that bring designers together to explore design for social impact, exchange ideas, and learn from one another while helping create an inclusive, community-driven design environment.",
   },
   {
     title: "Founder",
     organization: "Outline Studio",
     dates: "August 2026 - Present",
     image: "3fb80.png",
+    description:
+      "Building a design studio focused on creating thoughtful digital experiences for startups and growing businesses. Lead the design process across UI/UX, landing pages, websites, and digital products, while managing client communication, project strategy, and delivery. Focus on combining strong visual design with business objectives to help brands communicate clearly and grow online.",
   },
   {
     title: "Product Design Intern",
     organization: "Pamprazzi",
     dates: "Nov 2024 - May 2025",
     image: "00dc0.png",
+    description:
+      "Contributed to product design initiatives by translating requirements into user flows, wireframes, and high-fidelity interfaces. Worked in Figma to explore design solutions, develop prototypes, and refine user experiences based on project needs. Collaborated with the team to maintain visual consistency and deliver intuitive, user-focused digital experiences.",
   },
 ]
 
@@ -59,6 +70,7 @@ function ResumeEntry({
   organization,
   dates,
   image,
+  description,
   featured = false,
   last = false,
 }: {
@@ -66,6 +78,7 @@ function ResumeEntry({
   organization: string
   dates: string
   image: string
+  description?: string
   featured?: boolean
   last?: boolean
 }) {
@@ -81,7 +94,7 @@ function ResumeEntry({
             <span>{dates}</span>
           </div>
         </div>
-        <p>{description}</p>
+        <p>{description ?? defaultDescription}</p>
       </div>
     </article>
   )
@@ -129,6 +142,7 @@ export default function ResumePage() {
             height="20"
           />
         </a>
+        <MobileMenu active="resume" />
       </header>
 
       <section className="resume-intro">
@@ -149,9 +163,14 @@ export default function ResumePage() {
         </div>
         <div className="resume-actions">
           <div>
-            <button className="button" type="button">
+            <a
+              className="button"
+              href={projectInquiryURL}
+              target="_blank"
+              rel="noreferrer"
+            >
               Start A Project
-            </button>
+            </a>
             <button
               className="button button-secondary"
               type="button"
@@ -201,6 +220,7 @@ export default function ResumePage() {
           organization="B.Tech in Computer Science and Business Systems"
           dates="Sept 2022 - Jul 2026"
           image="6404f.png"
+          description="B.Tech in Computer Science and Business Systems, combining foundations in software development, business processes, and analytical problem-solving. Developed an understanding of how technology and business intersect to shape digital products and user experiences."
           last
         />
       </section>
@@ -214,48 +234,7 @@ export default function ResumePage() {
         </div>
       </section>
 
-      <footer className="footer resume-footer">
-        <button
-          className="logo footer-logo logo-button"
-          type="button"
-          onClick={() => router.push("/")}
-        >
-          himanshu.
-        </button>
-        <div className="footer-links">
-          <div>
-            <strong>Navigate</strong>
-            <button type="button" onClick={() => router.push("/")}>
-              Projects
-            </button>
-            <button type="button" onClick={() => router.push("/experiments")}>
-              Experiments
-            </button>
-            <button type="button" onClick={() => router.push("/about")}>
-              About Me
-            </button>
-            <button type="button" onClick={() => router.push("/resume")}>
-              Resume
-            </button>
-          </div>
-          <div>
-            <strong>Connect</strong>
-            <a href="https://x.com/" target="_blank" rel="noreferrer">
-              X (Twitter)
-            </a>
-            <a href="https://linkedin.com/" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href="https://instagram.com/" target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-          </div>
-          <div>
-            <strong>Based in</strong>
-            <span>AMS &nbsp; 3:52 PM</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter className="resume-footer" />
     </main>
   )
 }

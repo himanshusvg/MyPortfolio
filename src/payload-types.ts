@@ -83,10 +83,6 @@ export interface Config {
     media: Media;
     folders: Folder;
     tags: Tag;
-    'case-studies': CaseStudy;
-    experiments: Experiment;
-    testimonials: Testimonial;
-    clients: Client;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -99,10 +95,6 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     folders: FoldersSelect<false> | FoldersSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
-    'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
-    experiments: ExperimentsSelect<false> | ExperimentsSelect<true>;
-    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
-    clients: ClientsSelect<false> | ClientsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -255,111 +247,6 @@ export interface Tag {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies".
- */
-export interface CaseStudy {
-  id: string;
-  title: string;
-  slug: string;
-  description: string;
-  tags?:
-    | {
-        label: string;
-        id?: string | null;
-      }[]
-    | null;
-  cover: string | Media;
-  /**
-   * Optional URL opened by “View Project”.
-   */
-  projectURL?: string | null;
-  displayOrder: number;
-  createdBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "experiments".
- */
-export interface Experiment {
-  id: string;
-  title: string;
-  slug: string;
-  image: string | Media;
-  column: '1' | '2' | '3';
-  /**
-   * CSS ratio such as “1 / 1” or “370 / 429”.
-   */
-  aspectRatio: string;
-  projectURL?: string | null;
-  displayOrder: number;
-  createdBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials".
- */
-export interface Testimonial {
-  id: string;
-  quote: string;
-  name: string;
-  role: string;
-  displayOrder: number;
-  createdBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "clients".
- */
-export interface Client {
-  id: string;
-  name: string;
-  logo: string | Media;
-  websiteURL?: string | null;
-  displayOrder: number;
-  createdBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedBy?: {
-    relationTo: 'admins';
-    value: string | Admin;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -397,22 +284,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tags';
         value: string | Tag;
-      } | null)
-    | ({
-        relationTo: 'case-studies';
-        value: string | CaseStudy;
-      } | null)
-    | ({
-        relationTo: 'experiments';
-        value: string | Experiment;
-      } | null)
-    | ({
-        relationTo: 'testimonials';
-        value: string | Testimonial;
-      } | null)
-    | ({
-        relationTo: 'clients';
-        value: string | Client;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -559,77 +430,6 @@ export interface TagsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies_select".
- */
-export interface CaseStudiesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  tags?:
-    | T
-    | {
-        label?: T;
-        id?: T;
-      };
-  cover?: T;
-  projectURL?: T;
-  displayOrder?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "experiments_select".
- */
-export interface ExperimentsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  image?: T;
-  column?: T;
-  aspectRatio?: T;
-  projectURL?: T;
-  displayOrder?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials_select".
- */
-export interface TestimonialsSelect<T extends boolean = true> {
-  quote?: T;
-  name?: T;
-  role?: T;
-  displayOrder?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "clients_select".
- */
-export interface ClientsSelect<T extends boolean = true> {
-  name?: T;
-  logo?: T;
-  websiteURL?: T;
-  displayOrder?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -711,8 +511,7 @@ export interface CollectionsWidget {
 export interface CollectionQueryWidget {
   data?: {
     title?: string | null;
-    relatedCollection:
-      'admins' | 'media' | 'folders' | 'tags' | 'case-studies' | 'experiments' | 'testimonials' | 'clients';
+    relatedCollection: 'admins' | 'media' | 'folders' | 'tags';
     where?:
       | {
           [k: string]: unknown;
@@ -734,8 +533,7 @@ export interface CollectionQueryWidget {
  */
 export interface ActivityWidget {
   data?: {
-    excludedCollections?:
-      ('admins' | 'media' | 'folders' | 'tags' | 'case-studies' | 'experiments' | 'testimonials' | 'clients')[] | null;
+    excludedCollections?: ('admins' | 'media' | 'folders' | 'tags')[] | null;
   };
   width: 'small' | 'medium' | 'large' | 'x-large' | 'full';
 }

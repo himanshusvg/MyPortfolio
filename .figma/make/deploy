@@ -2,5 +2,8 @@
 set -euo pipefail
 export NODE_ENV=production
 
-pnpm run build
+# Next and Payload write normal build progress to stderr. Merge it into stdout
+# so successful progress is not misclassified as an error; the exit code remains
+# unchanged and `set -e` still stops deployment on a real build failure.
+pnpm run build 2>&1
 figma make deploy --build-dir .next

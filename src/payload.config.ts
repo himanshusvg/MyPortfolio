@@ -7,10 +7,6 @@ import { Admins } from './collections/Admins'
 import { Media } from './collections/Media'
 import { Folders } from './collections/Folders'
 import { Tags } from './collections/Tags'
-import { CaseStudies } from './collections/CaseStudies'
-import { Clients } from './collections/Clients'
-import { Experiments } from './collections/Experiments'
-import { Testimonials } from './collections/Testimonials'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,18 +28,9 @@ export default buildFigmaConfig({
   },
   i18n: {
     fallbackLanguage: 'en',
-    supportedLanguages: { 'en': adminLanguage },
+    supportedLanguages: { en: adminLanguage },
   },
-  collections: [
-    Admins,
-    Media,
-    Folders,
-    Tags,
-    CaseStudies,
-    Experiments,
-    Testimonials,
-    Clients,
-  ],
+  collections: [Admins, Media, Folders, Tags],
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

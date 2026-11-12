@@ -1,43 +1,43 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: "Freehand:Regular";
-  src: url("https://static.figma.com/font/Freehand-Regular_2") format("woff2");
+  font-family: 'Freehand:Regular';
+  src: url('https://static.figma.com/font/Freehand-Regular_2') format('woff2');
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "Geist:Light";
-  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+  font-family: 'Geist:Light';
+  src: url('https://static.figma.com/font/Geist_wght__1') format('woff2');
   font-style: normal;
   font-weight: 300;
 }
 
 @font-face {
-  font-family: "Geist:Medium";
-  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+  font-family: 'Geist:Medium';
+  src: url('https://static.figma.com/font/Geist_wght__1') format('woff2');
   font-style: normal;
   font-weight: 500;
 }
 
 @font-face {
-  font-family: "Geist:Regular";
-  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+  font-family: 'Geist:Regular';
+  src: url('https://static.figma.com/font/Geist_wght__1') format('woff2');
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "Manrope:Medium";
-  src: url("https://static.figma.com/font/Manrope_wght__1") format("woff2");
+  font-family: 'Manrope:Medium';
+  src: url('https://static.figma.com/font/Manrope_wght__1') format('woff2');
   font-style: normal;
   font-weight: 500;
 }
 
 @font-face {
-  font-family: "Manrope:SemiBold";
-  src: url("https://static.figma.com/font/Manrope_wght__1") format("woff2");
+  font-family: 'Manrope:SemiBold';
+  src: url('https://static.figma.com/font/Manrope_wght__1') format('woff2');
   font-style: normal;
   font-weight: 600;
 }
@@ -45,7 +45,7 @@
 :root {
   color: #302720;
   background: #fffcf6;
-  font-family: "Geist:Regular", sans-serif;
+  font-family: 'Geist:Regular', sans-serif;
   font-synthesis: none;
   --orange: #b94f30;
   --orange-button: #d96542;
@@ -65,7 +65,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 300px;
   background: var(--paper);
 }
 
@@ -101,7 +101,7 @@ main {
   justify-self: start;
   padding: 10px;
   color: var(--orange);
-  font-family: "Freehand:Regular", cursive;
+  font-family: 'Freehand:Regular', cursive;
   font-size: 24px;
   line-height: 16px;
   text-align: center;
@@ -122,11 +122,13 @@ main {
   border-radius: 16px;
   background: transparent;
   color: rgba(250, 238, 233, 0.5);
-  font-family: "Manrope:SemiBold", sans-serif;
+  font-family: 'Manrope:SemiBold', sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
-  transition: color 180ms ease, background 180ms ease;
+  transition:
+    color 180ms ease,
+    background 180ms ease;
 }
 
 .site-header nav button:hover,
@@ -137,6 +139,116 @@ main {
 
 .site-header > .button {
   justify-self: end;
+}
+
+.mobile-menu {
+  position: relative;
+  z-index: 30;
+  display: none;
+  justify-self: end;
+}
+
+.mobile-menu-toggle {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: #000;
+}
+
+.mobile-menu-toggle > span {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 14px;
+}
+
+.mobile-menu-toggle i {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--cream);
+  transition:
+    top 180ms ease,
+    transform 180ms ease;
+}
+
+.mobile-menu-toggle i:first-child {
+  top: 3px;
+}
+
+.mobile-menu-toggle i:last-child {
+  top: 9px;
+}
+
+.mobile-menu.is-open .mobile-menu-toggle i:first-child {
+  top: 6px;
+  transform: rotate(45deg);
+}
+
+.mobile-menu.is-open .mobile-menu-toggle i:last-child {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+.mobile-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  width: min(220px, calc(100vw - 48px));
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 8px;
+  transform: translateY(-6px);
+  border-radius: 16px;
+  opacity: 0;
+  background: #000;
+  pointer-events: none;
+  transition:
+    max-height 220ms ease,
+    padding 220ms ease,
+    opacity 160ms ease,
+    transform 220ms ease;
+}
+
+.mobile-menu.is-open .mobile-menu-panel {
+  max-height: 240px;
+  padding: 8px;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-panel a {
+  padding: 11px 12px;
+  border-radius: 10px;
+  color: rgba(250, 238, 233, 0.65);
+  font-family: 'Manrope:SemiBold', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  transition:
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.mobile-menu-panel a:hover,
+.mobile-menu-panel a.active {
+  color: var(--cream);
+  background: var(--orange);
+}
+
+.mobile-menu-toggle:focus-visible,
+.mobile-menu-panel a:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
 }
 
 .button {
@@ -152,12 +264,15 @@ main {
   border-radius: 12px;
   background: var(--orange-button);
   color: var(--cream);
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;
   text-transform: capitalize;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
 }
 
 .button:hover {
@@ -256,7 +371,7 @@ main {
   display: block;
   margin-bottom: 12px;
   color: var(--orange);
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 20px;
   font-weight: 500;
 }
@@ -290,7 +405,7 @@ main {
   background: var(--orange);
   box-shadow: 0 8px 24px rgba(185, 79, 48, 0.24);
   color: var(--cream);
-  font-family: "Manrope:SemiBold", sans-serif;
+  font-family: 'Manrope:SemiBold', sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
@@ -307,7 +422,7 @@ main {
   background: var(--soft-orange);
   box-shadow: 0 10px 30px rgba(48, 39, 32, 0.08);
   color: var(--orange);
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 16px;
   line-height: 18px;
 }
@@ -333,7 +448,7 @@ body.breakout-game-active .jazz-stop-button {
 .breakout-result p {
   margin: 0;
   color: #302720;
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: clamp(36px, 7vw, 78px);
   font-weight: 500;
   line-height: 1.05;
@@ -352,7 +467,7 @@ body.breakout-game-active .jazz-stop-button {
 .hero h1 {
   margin: 0;
   color: #302720;
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 36px;
   font-weight: 500;
   line-height: 44px;
@@ -363,7 +478,7 @@ body.breakout-game-active .jazz-stop-button {
   max-width: 1160px;
   margin: 0;
   color: rgba(0, 0, 0, 0.45);
-  font-family: "Geist:Light", sans-serif;
+  font-family: 'Geist:Light', sans-serif;
   font-size: 36px;
   font-weight: 300;
   line-height: 40px;
@@ -398,7 +513,7 @@ body.breakout-game-active .jazz-stop-button {
 .section-title h2 {
   margin: 0;
   color: var(--orange);
-  font-family: "Geist:Regular", sans-serif;
+  font-family: 'Geist:Regular', sans-serif;
   font-size: 32px;
   font-weight: 400;
   line-height: 36px;
@@ -435,10 +550,22 @@ body.breakout-game-active .jazz-stop-button {
   justify-content: space-between;
 }
 
+.project-card--skoolink .project-copy {
+  gap: 12px 0;
+}
+
+.project-card--youmatter .project-copy {
+  gap: 12px 0;
+}
+
+.project-card--equalent .project-copy {
+  gap: 12px 0;
+}
+
 .project-copy h3 {
   margin: 0 0 12px;
   color: #000;
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 42px;
   font-weight: 500;
   line-height: 40px;
@@ -449,7 +576,7 @@ body.breakout-game-active .jazz-stop-button {
   max-width: 402px;
   margin: 0;
   color: #717880;
-  font-family: "Manrope:Medium", sans-serif;
+  font-family: 'Manrope:Medium', sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 23.2px;
@@ -462,12 +589,24 @@ body.breakout-game-active .jazz-stop-button {
   margin-top: 16px;
 }
 
+.project-card--skoolink .tags {
+  gap: 8px 12px;
+}
+
+.project-card--youmatter .tags {
+  gap: 8px 12px;
+}
+
+.project-card--equalent .tags {
+  gap: 8px 12px;
+}
+
 .tags span {
   padding: 6px 8px;
   border-radius: 10px;
   background: var(--soft-orange);
   color: #302720;
-  font-family: "Manrope:Medium", sans-serif;
+  font-family: 'Manrope:Medium', sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -490,7 +629,9 @@ body.breakout-game-active .jazz-stop-button {
   border: 1px solid #f5f5f5;
   border-radius: 7px;
   background: #e8b6a4;
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 350ms ease;
+  transition:
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms ease;
 }
 
 .project-image:hover {
@@ -502,6 +643,15 @@ body.breakout-game-active .jazz-stop-button {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.project-card--skoolink .project-image img {
+  width: fit-content;
+  height: fit-content;
+}
+
+.project-card--youmatter .project-image img {
+  border-radius: 0;
 }
 
 .about-layout {
@@ -530,7 +680,7 @@ body.breakout-game-active .jazz-stop-button {
   max-width: 694px;
   margin: 0;
   color: #000;
-  font-family: "Geist:Regular", sans-serif;
+  font-family: 'Geist:Regular', sans-serif;
   font-size: 36px;
   font-weight: 400;
   line-height: 37.8px;
@@ -569,7 +719,9 @@ body.breakout-game-active .jazz-stop-button {
   border-radius: 10px;
   font-size: 16px;
   line-height: 20px;
-  transition: background 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .service-card:hover {
@@ -650,6 +802,7 @@ body.breakout-game-active .jazz-stop-button {
 }
 
 .client-logo {
+  position: relative;
   display: flex;
   height: 33px;
   align-items: center;
@@ -659,6 +812,29 @@ body.breakout-game-active .jazz-stop-button {
   display: block;
   max-height: 33px;
   width: auto;
+}
+
+.client-logo--swap img {
+  width: 96px;
+  max-width: 100%;
+  max-height: 24px;
+  transition: opacity 220ms ease;
+}
+
+.client-logo--swap .client-logo-color {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+}
+
+.client:hover .client-logo--swap .client-logo-default,
+.client:focus-visible .client-logo--swap .client-logo-default {
+  opacity: 0;
+}
+
+.client:hover .client-logo--swap .client-logo-color,
+.client:focus-visible .client-logo--swap .client-logo-color {
+  opacity: 1;
 }
 
 .testimonial-area {
@@ -727,7 +903,9 @@ body.breakout-game-active .jazz-stop-button {
   border: 0;
   border-radius: 50%;
   background: transparent;
-  transition: background 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .carousel-controls button:hover {
@@ -812,7 +990,9 @@ body.breakout-game-active .jazz-stop-button {
   padding: 0;
   background: transparent;
   text-align: left;
-  transition: color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .footer-links a:hover,
@@ -837,31 +1017,26 @@ body.breakout-game-active .jazz-stop-button {
 }
 
 .experiments-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  column-count: 3;
+  column-gap: 20px;
   width: min(1152px, calc(100% - 128px));
   margin: 0 auto;
   padding: 56px 0 80px;
 }
 
-.experiment-column {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .experiment-card {
   display: flex;
   width: 100%;
+  margin-bottom: 20px;
   cursor: pointer;
   border: 0;
   padding: 0;
+  break-inside: avoid;
   flex-direction: column;
   gap: 8px;
   background: transparent;
   text-align: left;
+  text-decoration: none;
 }
 
 .experiment-thumbnail {
@@ -875,8 +1050,7 @@ body.breakout-game-active .jazz-stop-button {
 .experiment-thumbnail img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -886,7 +1060,7 @@ body.breakout-game-active .jazz-stop-button {
 
 .experiment-title {
   color: #717880;
-  font-family: "Manrope:SemiBold", sans-serif;
+  font-family: 'Manrope:SemiBold', sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
@@ -962,13 +1136,38 @@ body.breakout-game-active .jazz-stop-button {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 12px;
+}
+
+@media (min-width: 901px) {
+  .about-hero-section {
+    align-items: stretch;
+    justify-content: start;
+    gap: clamp(32px, 3.333vw, 48px);
+  }
+
+  .about-hero-photo {
+    height: auto;
+    min-height: 526px;
+  }
+
+  .about-hero-copy {
+    min-height: 526px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .about-hero-section {
+    justify-content: center;
+    gap: 64px;
+  }
 }
 
 .about-hero-copy h1,
 .about-content-section h2 {
   margin: 0;
   color: #04111f;
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 28px;
   font-weight: 500;
   line-height: 36.4px;
@@ -988,7 +1187,7 @@ body.breakout-game-active .jazz-stop-button {
   max-width: 629px;
   margin-top: 40px;
   color: #6b6259;
-  font-family: "Geist:Light", sans-serif;
+  font-family: 'Geist:Light', sans-serif;
   font-size: 16px;
   font-weight: 300;
   line-height: 23.2px;
@@ -1061,7 +1260,7 @@ body.breakout-game-active .jazz-stop-button {
 
 .about-section-heading h2,
 .reading-section h2 {
-  font-family: "Geist:Regular", sans-serif;
+  font-family: 'Geist:Regular', sans-serif;
   font-weight: 400;
 }
 
@@ -1167,7 +1366,7 @@ body.breakout-game-active .jazz-stop-button {
 .resume-profile p {
   margin: 0;
   color: #717880;
-  font-family: "Manrope:Medium", sans-serif;
+  font-family: 'Manrope:Medium', sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 23.2px;
@@ -1211,7 +1410,7 @@ body.breakout-game-active .jazz-stop-button {
   margin: 0;
   padding: 4px;
   color: #302720;
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 28px;
   font-weight: 500;
   line-height: 36.4px;
@@ -1253,7 +1452,7 @@ body.breakout-game-active .jazz-stop-button {
 .resume-entry-copy h3 {
   margin: 0 0 8px;
   color: #302720;
-  font-family: "Geist:Medium", sans-serif;
+  font-family: 'Geist:Medium', sans-serif;
   font-size: 17px;
   font-weight: 500;
   line-height: 20.4px;
@@ -1269,7 +1468,7 @@ body.breakout-game-active .jazz-stop-button {
   align-items: center;
   gap: 10px;
   color: #717880;
-  font-family: "Geist:Light", sans-serif;
+  font-family: 'Geist:Light', sans-serif;
   font-size: 15px;
   font-weight: 300;
   line-height: 22.5px;
@@ -1304,7 +1503,7 @@ body.breakout-game-active .jazz-stop-button {
   border-radius: 12px;
   background: var(--soft-orange);
   color: #04111f;
-  font-family: "Manrope:Medium", sans-serif;
+  font-family: 'Manrope:Medium', sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
@@ -1325,7 +1524,7 @@ body.breakout-game-active .jazz-stop-button {
   background: rgba(255, 252, 246, 0.92);
   box-shadow: 0 10px 30px rgba(48, 39, 32, 0.08);
   color: var(--orange);
-  font-family: "Geist:Regular", sans-serif;
+  font-family: 'Geist:Regular', sans-serif;
   font-size: 13px;
   line-height: 18px;
   backdrop-filter: blur(12px);
@@ -1341,7 +1540,9 @@ body.breakout-game-active .jazz-stop-button {
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.is-visible {
@@ -1362,12 +1563,21 @@ body.breakout-game-active .jazz-stop-button {
 
 @media (max-width: 900px) {
   .site-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
     padding: 20px 24px;
   }
 
   .site-header nav {
     display: none;
+  }
+
+  .site-header .mobile-menu {
+    display: block;
+  }
+
+  .site-header .mobile-menu-panel {
+    display: grid;
   }
 
   .hero {
@@ -1393,6 +1603,16 @@ body.breakout-game-active .jazz-stop-button {
   .split-layout,
   .contact-layout {
     grid-template-columns: 1fr;
+  }
+
+  .contact-layout.contact-layout-desktop-aligned {
+    width: 100%;
+    flex-direction: column !important;
+    align-items: stretch;
+  }
+
+  .contact-layout.contact-layout-desktop-aligned > .intro-column {
+    width: 100% !important;
   }
 
   .project-card {
@@ -1425,6 +1645,8 @@ body.breakout-game-active .jazz-stop-button {
   }
 
   .calendar-preview {
+    flex: 0 0 auto;
+    max-width: 100%;
     height: clamp(700px, 100vw, 820px);
   }
 
@@ -1438,7 +1660,7 @@ body.breakout-game-active .jazz-stop-button {
   }
 
   .experiments-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-count: 2;
     width: calc(100% - 48px);
     padding: 44px 0 64px;
   }
@@ -1448,12 +1670,19 @@ body.breakout-game-active .jazz-stop-button {
   }
 
   .about-hero-section {
-    grid-template-columns: minmax(280px, 0.8fr) 1.2fr;
+    grid-template-columns: 1fr;
+    gap: 32px;
     padding: 32px 24px;
   }
 
   .about-hero-photo {
-    height: 480px;
+    height: clamp(420px, 70vw, 560px);
+  }
+
+  .about-hero-copy {
+    min-width: 0;
+    min-height: 0;
+    gap: 32px;
   }
 
   .about-content-section {
@@ -1591,7 +1820,7 @@ body.breakout-game-active .jazz-stop-button {
   }
 
   .experiments-gallery {
-    grid-template-columns: 1fr;
+    column-count: 1;
     width: calc(100% - 36px);
     padding-top: 32px;
   }
@@ -1613,6 +1842,11 @@ body.breakout-game-active .jazz-stop-button {
   .about-hero-photo {
     height: auto;
     aspect-ratio: 0.92;
+    background: var(--paper);
+  }
+
+  .about-hero-photo > img {
+    object-fit: contain;
   }
 
   .about-hero-copy {
@@ -1627,7 +1861,9 @@ body.breakout-game-active .jazz-stop-button {
   }
 
   .about-joke-button {
+    width: 100%;
     max-width: 100%;
+    justify-content: space-between;
     white-space: normal;
   }
 
@@ -1711,6 +1947,31 @@ body.breakout-game-active .jazz-stop-button {
 
   body.breakout-game-active .jazz-stop-button {
     bottom: 70px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header {
+    padding-inline: 18px;
+  }
+
+  .site-header > .button {
+    width: 42px;
+    min-width: 42px;
+    padding: 12px;
+  }
+
+  .site-header > .button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .site-header > .button img {
+    display: block;
   }
 }
 
